@@ -26,11 +26,24 @@
 
 <body class="bg-blue-200 px-16 py-12">
   <div id="app">
-    <h1 class="flex items-center justify-center text-3xl font-bold mb-8">
-      Travel Hokkaido Gallery : Adventure On Japan's North Island <span
-        class="text-4xl font-bold text-red-400 tracking-wider">|</span>
+    <h1 class="flex items-center justify-left text-3xl font-bold mb-8">
+      Travel Hokkaido Gallery<span class="text-4xl font-bold text-red-400 tracking-wider">|</span>
       LIKE <i class="material-icons text-red-400 text-3xl">favorite</i> : {{sumLike}}
+
+      <div v-if="search" @click="Search" class="ml-5">
+        <i class="material-icons text-5xl text-red-400">
+          search
+        </i>
+      </div>
+
+
+      <i v-else = "search" class="ml-5">
+        <input v-model="inputTask" class="rounded-lg px-2 text-lg" placeholder="searching here" @keyup.enter="search" />
+        <button v-on:click="Search" class="bg-red-400 text-white rounded-lg px-2 text-lg">Cancel</button>
+      </i>
+
     </h1>
+
     <div class="grid grid-cols-3 auto-rows-auto gap-16 font-semibold">
       <div v-for="(task,index) in Hokkaido" class="mx-auto">
         <img :src="task.url" class="w-80 h-60 rounded-md border-2 border-red-400" v-on:dblclick="likeCheck(index)">

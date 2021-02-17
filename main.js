@@ -61,14 +61,21 @@ const app = {
           url: './images/12.jpg',
           Like: false
         },
-      ]
+      ],
+      inputTask : '',
+      search : true
     }
   },
   methods: {
     likeCheck(index) {
       this.Hokkaido[index].Like = !this.Hokkaido[index].Like
+    },
+
+    Search() {
+      this.search = !this.search 
     }
   },
+
   computed: {
     sumLike() {
       return this.Hokkaido.filter(t => t.Like).length
