@@ -30,22 +30,20 @@
       Travel Hokkaido Gallery<span class="text-4xl font-bold text-red-400 tracking-wider">|</span>
       LIKE <i class="material-icons text-red-400 text-3xl">favorite</i> : {{sumLike}}
 
-      <div v-if="search" @click="Search" class="ml-5">
-        <i class="material-icons text-5xl text-red-400">
-          search
-        </i>
+      <div>
+        <div v-if="searchOpen">
+          <input v-model="inputsTask" placeholder="Searching Here.... " class="rounded-lg px-2 text-lg ml-5">
+          <button @click="closeSearchMenu" class="bg-red-400 text-white rounded-lg px-2 text-lg ml-1">Cancle</button>
+        </div>
+
+        <i v-else="searchOpen" class="material-icons inline-block text-5xl text-red-400 text-3xl ml-5"
+          @click="openSearchMenu">search</i>
       </div>
-
-
-      <i v-else = "search" class="ml-5">
-        <input v-model="inputTask" class="rounded-lg px-2 text-lg" placeholder="searching here" @keyup.enter="search" />
-        <button v-on:click="Search" class="bg-red-400 text-white rounded-lg px-2 text-lg">Cancel</button>
-      </i>
-
     </h1>
 
+
     <div class="grid grid-cols-3 auto-rows-auto gap-16 font-semibold">
-      <div v-for="(task,index) in Hokkaido" class="mx-auto">
+      <div v-for="(task,index) in filteredList" class="mx-auto">
         <img :src="task.url" class="w-80 h-60 rounded-md border-2 border-red-400" v-on:dblclick="likeCheck(index)">
         <p class="text-center mt-6 text-xl tracking-wider">
           <i v-if="task.Like" class="material-icons text-red-400 text-4xl">favorite</i>
@@ -54,6 +52,7 @@
         </p>
       </div>
     </div>
+    <div v-if="searchFound" class="text-center mt-48 text-9xl text-red-400">Photo Not Found !!!</div>
   </div>
 
   <!-- my main.js -->

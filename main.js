@@ -62,23 +62,42 @@ const app = {
           Like: false
         },
       ],
-      inputTask : '',
-      search : true
+      inputsTask: '',
+      searchOpen: false,
+      searchFound: false,
+      showImages: false,
+      currentIndex: 0
     }
   },
   methods: {
     likeCheck(index) {
       this.Hokkaido[index].Like = !this.Hokkaido[index].Like
     },
-
-    Search() {
-      this.search = !this.search 
-    }
+    openSearchMenu() {
+      this.searchOpen = !this.searchOpen
+    },
+    closeSearchMenu() {
+      this.searchOpen = !this.searchOpen
+      this.inputsTask = ''
+    },
   },
 
   computed: {
     sumLike() {
       return this.Hokkaido.filter(t => t.Like).length
+    },
+    filteredList() {
+      this.searchFound = false
+      if (this.inputsTask == '') {
+        return this.Hokkaido
+      } else {
+        let search = this.Hokkaido.filter(t => this.inputsTask.toLowerCase().split(' ').every(v => t.name.toLowerCase().includes(v)))
+        if (search == '') {
+          this.searchFound = true
+        } else {
+          return search
+        }
+      }
     }
   }
 }
