@@ -65,7 +65,7 @@ const app = {
       inputsTask: '',
       searchOpen: false,
       searchFound: false,
-      showImages: false,
+      selectImage: false,
       currentIndex: 0
     }
   },
@@ -80,6 +80,13 @@ const app = {
       this.searchOpen = !this.searchOpen
       this.inputsTask = ''
     },
+    viewImg(index) {
+      this.selectImage = true;
+      this.currentIndex = index;
+    },
+    hideView() {
+      this.selectImage = false;
+    }
   },
 
   computed: {
